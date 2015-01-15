@@ -1,0 +1,5 @@
+.*
+*.log
+gulpfile.js
+node_modules
+demo

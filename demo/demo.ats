@@ -1,0 +1,106 @@
+'use strict';
+
+var t = require('tcomb');
+
+t.options.onFail = function (message) {
+  console.error(message);
+};
+
+//
+// primitives
+//
+
+var n1: t.Num = 1; // ok
+var n2: t.Num = 'a'; // throws
+
+//
+// nullable types
+//
+var m1: t.maybe<t.Str> = 'a';  // ok
+var m2: t.maybe<t.Str> = null; // ok
+var m3: t.maybe<t.Str> = 1; // throws
+
+//
+// lists
+//
+
+var arr1: t.list<t.Str> = ['a']; // ok
+var arr2: t.list<t.Str> = [1]; // throws
+
+//
+// functions
+//
+
+function sum(a: t.Num, b: t.Num): t.Num {
+  return a + b;
+}
+sum(1, 2); // ok
+sum(1, 'a'); // throws
+
+//
+// classes
+//
+
+class Person {
+  constructor(name: t.Str, surname: t.Str) {
+    this.name = name;
+    this.surname = surname;
+  }
+}
+var p1: Person = new Person('Giulio', 'Canti'); // ok
+var p2: Person = new Person('Giulio'); // throws
+
+//
+// tuples
+//
+
+var t1: t.tuple<t.Str, t.Num> = [1, 'a']; // ok
+var t2: t.tuple<t.Str, t.Num> = [1, 2]; // throws
+
+//
+// dicts
+//
+
+var d1: t.dict<t.Str, t.Num> = {a: 1}; // ok
+var d2: t.dict<t.Str, t.Num> = {a: 'b'}; // throws
+
+//
+// enums
+//
+
+var Align = t.enums.of('left center right', 'Align');
+
+var e1: Align = 'left'; // ok
+var e2: Align = 'justify'; // throws
+
+//
+// subtypes
+//
+
+var Positive = t.subtype(t.Num, function (n) {
+  return n >= 0;
+}, 'Positive');
+
+var sn1: Positive = 1; // ok
+var sn2: Positive = -1; // throws
+var sn3: Positive = 'a'; // throws
+
+//
+// union
+//
+
+var StrOrNum = t.union([t.Str, t.Num], 'StrOrNum');
+
+var u1: StrOrNum = 'a'; // ok
+var u2: StrOrNum = 1; // ok
+
+//
+// tcomb's structs
+//
+var TPerson = t.struct({
+  name: t.Str,
+  surname: t.Str
+});
+
+var tp1: TPerson = new TPerson({name: 'Giulio', surname: 'Canti'});
+var tp2: TPerson = 1;

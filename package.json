@@ -1,0 +1,30 @@
+{
+  "name": "tcomb-ats",
+  "version": "0.1.0",
+  "description": "Assert library for AtScript",
+  "main": "index.js",
+  "scripts": {
+    "build": "browserify ./index.js -o ./demo/build/tcomb-ats.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/gcanti/tcomb-ats.git"
+  },
+  "author": "Giulio Canti <giulio.canti@gmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/gcanti/tcomb-ats/issues"
+  },
+  "homepage": "https://github.com/gcanti/tcomb-ats",
+  "dependencies": {
+    "tcomb": "^0.4.0"
+  },
+  "devDependencies": {
+    "browserify": "^8.1.0",
+    "gulp": "^3.8.9",
+    "gulp-rename": "^1.2.0",
+    "gulp-traceur": "^0.15.0",
+    "traceur": "^0.0.72",
+    "vinyl-source-stream": "^1.0.0"
+  }
+}
