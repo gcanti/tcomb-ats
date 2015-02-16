@@ -2,7 +2,7 @@
 
 var t = require('tcomb');
 
-t.options.onFail = function (message) {
+t.fail = function (message) {
   console.error(message);
 };
 

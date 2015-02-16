@@ -3,7 +3,7 @@ var $___46__46___;
 var assert = ($___46__46___ = require("../."), $___46__46___ && $___46__46___.__esModule && $___46__46___ || {default: $___46__46___}).assert;
 'use strict';
 var t = require('tcomb');
-t.options.onFail = function(message) {
+t.fail = function(message) {
   console.error(message);
 };
 var n1 = assert.type(1, t.Num);
